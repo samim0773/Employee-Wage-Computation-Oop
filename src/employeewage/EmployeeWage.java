@@ -1,43 +1,44 @@
 package employeewage;
-
-class CalculateWageForMonth {
-
-	// initialize variable and assign value
-	int emp_Hour;
-	final int is_Full_Time = 1;
-	final int is_Part_Time = 2;
-	int total_Salary = 0;
-	int working_Days = 20;
-	int emp_Rate_Per_Hour = 20;
+class CalculateWageTillCondition {
+	// global constant variable
+	public static final int is_Part_Time = 1;
+	public static final int is_Full_Time = 2;
+	public static final int emp_Rate_Per_Hour = 20;
+	public static final int num_Of_Working_Days = 2;
+	public static final int max_Hour_In_Month = 10;
 
 	public void calculateWage() {
-		// execute for loop till upto working day
-		for (int i = 0; i <= working_Days; i++) {
-			// generate randome number 0 1 2
-			int emp_Check = (int) Math.floor(Math.random() * 3);
+		int empHrs = 0, totalEmpHrs = 0, totalWorkingDays = 0;
+		// check total emp hour is less than 100 and total working day less than 20
+		while (totalEmpHrs <= max_Hour_In_Month && totalWorkingDays < num_Of_Working_Days) {
+			// increment total working day
+			totalWorkingDays++;
+			// generat random number 0 1 2
+			int empCheck = (int) Math.floor(Math.random() * 10) % 3;
 			// check condition
-			switch (emp_Check) {
-			// full time = 1
+			switch (empCheck) {
+			// full time = 2
 			case is_Full_Time:
-				emp_Hour = 8;
+				empHrs = 8;
 				break;
-			// part time = 2
+			// part time = 1
 			case is_Part_Time:
-				emp_Hour = 4;
+				empHrs = 4;
 				break;
 			// absent = 0
 			default:
-				emp_Hour = 0;
+				empHrs = 0;
 			}
-			// calculate emp salary
-			int salary = emp_Rate_Per_Hour * emp_Hour;
-			// update salary
-			total_Salary += salary;
+			// calculate total emp hour
+			totalEmpHrs += empHrs;
+			// print total working day
+			System.out.println("Day :" + totalWorkingDays + " Emp Hr: " + empHrs);
 		}
-		// print salary
-		System.out.println("Monthly salary of employee is : " + total_Salary);
+		// calculate emp wage
+		int totalEmpWage = totalEmpHrs * emp_Rate_Per_Hour;
+		// print emp wage
+		System.out.println("Total Emp Wage :" + totalEmpWage);
 	}
-
 }
 
 public class EmployeeWage {
@@ -45,7 +46,7 @@ public class EmployeeWage {
 		// print welcome message
 		System.out.println("Welcome to Employee Wage Computation Program");
 		// create object
-		CalculateWageForMonth emp1 = new CalculateWageForMonth();
+		CalculateWageTillCondition emp1 = new CalculateWageTillCondition();
 		// call method
 		emp1.calculateWage();
 	}
