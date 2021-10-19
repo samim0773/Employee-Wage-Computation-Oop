@@ -1,46 +1,59 @@
 package employeewage;
 
-class SolvingUsingSwitchCase {
-	// initialize variable and assign value
-	int emp_Hour;
-	final int is_Full_Time = 1;
-	final int is_Part_Time = 2;
-	int emp_Rate_Pr_Hour = 20;
-
-	public void calculateWage() {
-		// print random number 0 1 2
-		int emp_Check = (int) Math.floor(Math.random() * 3);
-		// check condition
-		switch (emp_Check) {
-		// full time 1
-		case is_Full_Time:
-			System.out.println("Employee is Full Time");
-			emp_Hour = 8;
-			break;
-		// part time 2
-		case is_Part_Time:
-			System.out.println("Employee is Part Time ");
-			emp_Hour = 4;
-			break;
-		// default emp absent
-		default:
-			System.out.println("Emloyee is Absent");
-			emp_Hour = 0;
-		}
-		// calculate emp salary
-		int salary = emp_Rate_Pr_Hour * emp_Hour;
-		// print emp salary
-		System.out.println("The salary of employee is :" + salary);
-	}
-}
-
 public class EmployeeWage {
-	public static void main(String[] args) {
-		// print welcome message
-		System.out.println("Welcome to Employee Wage Computation Program");
-		// create object
-		SolvingUsingSwitchCase emp1 = new SolvingUsingSwitchCase();
-		// call method
-		emp1.calculateWage();
+	// declared global variables
+	public static final int IS_FUll_TIME = 1;
+	public static final int IS_PART_TIME = 2;
+
+	// method: employee wage calculation
+	public static void empWageComputation(String company, int empWagePerHr, int workingDayPerMonth, int maxHrsInMonth) {
+		// variables initialization
+		int empHrs = 0, totalEmpHrs = 0, totalWorkingDays = 1;
+
+		// check total emp hour not more than 100 and total days not more than 20
+		while (totalEmpHrs <= maxHrsInMonth && totalWorkingDays <= workingDayPerMonth) {
+
+			// random number for employee check
+			int emp_Check = (int) Math.floor(Math.random() * 10) % 3;
+
+			// switch case to select emp full time, part time or absent
+			switch (emp_Check) {
+				case IS_FUll_TIME:
+					System.out.println("Employee is present Full Time");
+					empHrs = 8;
+					break;
+
+				case IS_PART_TIME:
+					System.out.println("Employee is present Part Time");
+					empHrs = 4;
+					break;
+
+				default:
+					System.out.println("Employee is Absent");
+					empHrs = 0;
+			}
+			
+			// calculate total emp hours
+			totalEmpHrs += empHrs;
+			System.out.println("Day : " + totalWorkingDays + " Emp Hrs : " + empHrs);
+
+			// day increment by 1 every iteration
+			totalWorkingDays++;
+		}
+
+		// calculate total emp wage
+		int totalEmpWage = totalEmpHrs * empWagePerHr;
+		System.out.println("Total Emp Wage For Company:-->" + company + " is:" + totalEmpWage);
+
 	}
+
+	public static void main(String[] args) {
+
+		System.out.println("Welcome to Employee Wage Computation");
+
+		// method call
+		empWageComputation("Amazon", 25, 5, 25);
+		empWageComputation("Flipkart", 20, 5, 30);
+	}
+
 }
